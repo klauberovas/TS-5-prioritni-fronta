@@ -1,33 +1,59 @@
 console.log('Ahoj');
 //objekt s úkolem
-interface QueueItem<T> {
-  value: T;
+interface Task<T> {
+  project: T;
+  assignee: T;
+  label: T;
   priority: number;
 }
 
 //Prioritní fronta
-type PriorityQueue<T> = QueueItem<T>[];
+type PriorityQueue<T> = Task<T>[];
 
 //fce přidání úkolů
-const enqueue = <T>(
-  arr: PriorityQueue<T>,
-  value: T,
-  priority: number,
-): PriorityQueue<T> => {
-  arr.push({ value, priority });
+const enqueue = <T>(arr: PriorityQueue<T>, obj: Task<T>): PriorityQueue<T> => {
+  arr.push(obj);
   return arr;
 };
 
 //přidání úkolů
 const priorityQueue: PriorityQueue<string> = [];
 //low= 1, medium=2, high= 3
-console.log(enqueue(priorityQueue, 'Task 1', 1));
-console.log(enqueue(priorityQueue, 'Task 2', 2));
-console.log(enqueue(priorityQueue, 'Task 3', 3));
-console.log(enqueue(priorityQueue, 'Task 4', 3));
+console.log(
+  enqueue(priorityQueue, {
+    project: 'Project 1',
+    assignee: 'Nováková',
+    label: 'bug',
+    priority: 1,
+  }),
+);
+console.log(
+  enqueue(priorityQueue, {
+    project: 'Project 2',
+    assignee: 'Rychlý',
+    label: 'feature',
+    priority: 2,
+  }),
+);
+console.log(
+  enqueue(priorityQueue, {
+    project: 'Project 1',
+    assignee: 'Novotný',
+    label: 'refactoring',
+    priority: 3,
+  }),
+);
+console.log(
+  enqueue(priorityQueue, {
+    project: 'Project 1',
+    assignee: 'Nováková',
+    label: 'done',
+    priority: 3,
+  }),
+);
 
 //fce  vrácení prvku s nejvyšší prioritou
-const dequeue = <T>(arr: PriorityQueue<T>): QueueItem<T> | null => {
+const dequeue = <T>(arr: PriorityQueue<T>): Task<T> | null => {
   if (arr.length === 0) {
     return null;
   }
@@ -42,9 +68,10 @@ const dequeue = <T>(arr: PriorityQueue<T>): QueueItem<T> | null => {
   return arr.splice(highestPriorityIndex, 1)[0];
 };
 
+//úprava fce dequeue
 interface Some<T> {
   kind: 'some';
-  value: QueueItem<T>;
+  value: Task<T>;
 }
 
 interface None {
@@ -67,6 +94,8 @@ const dequeueWithOption = <T>(arr: PriorityQueue<T>): Option<T> => {
   return { kind: 'some', value };
 };
 
+// console.log(dequeue(priorityQueue));
+// console.log(dequeue(priorityQueue));
 // console.log(dequeue(priorityQueue));
 // console.log(dequeue(priorityQueue));
 // console.log(dequeue(priorityQueue));
