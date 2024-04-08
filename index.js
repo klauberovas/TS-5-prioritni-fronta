@@ -1,36 +1,36 @@
-console.log('Ahoj');
+//přidání úkolů
+var priorityQueue = [];
 //fce přidání úkolů
 var enqueue = function (arr, obj) {
     arr.push(obj);
     return arr;
 };
-//přidání úkolů
-var priorityQueue = [];
 //low= 1, medium=2, high= 3
-console.log(enqueue(priorityQueue, {
+enqueue(priorityQueue, {
     project: 'Project 1',
     assignee: 'Nováková',
     label: 'bug',
     priority: 1,
-}));
-console.log(enqueue(priorityQueue, {
-    project: 'Project 2',
-    assignee: 'Rychlý',
-    label: 'feature',
-    priority: 2,
-}));
-console.log(enqueue(priorityQueue, {
-    project: 'Project 1',
-    assignee: 'Novotný',
-    label: 'refactoring',
-    priority: 3,
-}));
-console.log(enqueue(priorityQueue, {
-    project: 'Project 1',
-    assignee: 'Nováková',
-    label: 'done',
-    priority: 3,
-}));
+}),
+    enqueue(priorityQueue, {
+        project: 'Project 2',
+        assignee: 'Rychlý',
+        label: 'feature',
+        priority: 2,
+    }),
+    enqueue(priorityQueue, {
+        project: 'Project 1',
+        assignee: 'Novotný',
+        label: 'refactoring',
+        priority: 3,
+    }),
+    enqueue(priorityQueue, {
+        project: 'Project 1',
+        assignee: 'Nováková',
+        label: 'done',
+        priority: 3,
+    }),
+    console.log(priorityQueue);
 //fce  vrácení prvku s nejvyšší prioritou
 var dequeue = function (arr) {
     if (arr.length === 0) {

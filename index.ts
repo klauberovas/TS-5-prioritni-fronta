@@ -1,4 +1,3 @@
-console.log('Ahoj');
 //objekt s úkolem
 interface Task<T> {
   project: T;
@@ -10,48 +9,42 @@ interface Task<T> {
 //Prioritní fronta
 type PriorityQueue<T> = Task<T>[];
 
+//přidání úkolů
+const priorityQueue: PriorityQueue<string> = [];
+
 //fce přidání úkolů
 const enqueue = <T>(arr: PriorityQueue<T>, obj: Task<T>): PriorityQueue<T> => {
   arr.push(obj);
   return arr;
 };
 
-//přidání úkolů
-const priorityQueue: PriorityQueue<string> = [];
 //low= 1, medium=2, high= 3
-console.log(
-  enqueue(priorityQueue, {
-    project: 'Project 1',
-    assignee: 'Nováková',
-    label: 'bug',
-    priority: 1,
-  }),
-);
-console.log(
+
+enqueue(priorityQueue, {
+  project: 'Project 1',
+  assignee: 'Nováková',
+  label: 'bug',
+  priority: 1,
+}),
   enqueue(priorityQueue, {
     project: 'Project 2',
     assignee: 'Rychlý',
     label: 'feature',
     priority: 2,
   }),
-);
-console.log(
   enqueue(priorityQueue, {
     project: 'Project 1',
     assignee: 'Novotný',
     label: 'refactoring',
     priority: 3,
   }),
-);
-console.log(
   enqueue(priorityQueue, {
     project: 'Project 1',
     assignee: 'Nováková',
     label: 'done',
     priority: 3,
   }),
-);
-
+  console.log(priorityQueue);
 //fce  vrácení prvku s nejvyšší prioritou
 const dequeue = <T>(arr: PriorityQueue<T>): Task<T> | null => {
   if (arr.length === 0) {
